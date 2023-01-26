@@ -299,7 +299,7 @@ while r.leerT() < Tfin and not r.leerFinFases()   and not r.leerColision():
     # } No tocar desde aqui
     #----------------------------------
     
-    while r.leerT() < Tfin  and not r.leerFinal()  and not r.leerColision():
+    while r.leerT() < Tfin and not r.leerFinal()  and not r.leerColision():
           
         r.actTiempo()
         
