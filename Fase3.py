@@ -301,7 +301,7 @@ while r.leerT() < Tfin and not r.leerFinFases()   and not r.leerColision():
         # Tocar a partir de aqui {
         #----------------------------------
         def move(v,w):
-            L=0.025
+            L=0.02
             ruedaI=(2*v-L*w)/2
             ruedaD=(2*v+L*w)/2
             return ruedaI,ruedaD
