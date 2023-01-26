@@ -104,7 +104,7 @@ class Robot:
 
             if abs(self.__ang)>2*np.pi :
                 abs_ang=abs(self.__ang)
-                aux=math.ceil(abs_ang/(2*np.pi));
+                aux=math.ceil(abs_ang/(2*np.pi))
                 abs_ang=abs_ang-(aux-1)*(2*np.pi)
                 
                 if self.__ang <0: 
@@ -288,11 +288,12 @@ while r.leerT() < Tfin and not r.leerFinFases()   and not r.leerColision():
     # Tocar a partir de aqui {
     #----------------------------------
     #----------------------------------
-    def move(v,w):
-        L=0.02
-        ruedaI=(2*v-L*w)/2
-        ruedaD=(2*v+L*w)/2
-        return ruedaI,ruedaD
+
+    def move(v, w):
+        L = 0.025
+        ruedaI = (2*v-L*w)/2
+        ruedaD = (2*v+L*w)/2
+        return ruedaI, ruedaD
     
     #------------------------------------
     # } No tocar desde aqui
@@ -306,7 +307,7 @@ while r.leerT() < Tfin and not r.leerFinFases()   and not r.leerColision():
         # Tocar a partir de aqui {
         
             
-        lw,rw=move(2,0)
+        lw,rw = move(1,1)
         print(f'Rueda Izq: {lw} Rueda Der: {rw}')
         r.fijarVel(lw,rw)
 
