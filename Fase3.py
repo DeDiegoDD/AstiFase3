@@ -292,7 +292,7 @@ while r.leerT() < Tfin and not r.leerFinFases()   and not r.leerColision():
         L=0.02
         ruedaI=(2*v-L*w)/2
         ruedaD=(2*v+L*w)/2
-        return ruedaI,ruedaD-L
+        return ruedaI,ruedaD
     
     #------------------------------------
     # } No tocar desde aqui
@@ -306,7 +306,7 @@ while r.leerT() < Tfin and not r.leerFinFases()   and not r.leerColision():
         # Tocar a partir de aqui {
         
             
-        lw,rw=move(2,2)
+        lw,rw=move(2,0)
         print(f'Rueda Izq: {lw} Rueda Der: {rw}')
         r.fijarVel(lw,rw)
 
