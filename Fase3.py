@@ -300,7 +300,7 @@ while r.leerT() < Tfin and not r.leerFinFases()   and not r.leerColision():
         #------------------------------------
         # Tocar a partir de aqui {
         #----------------------------------
-                
+        r.fijarVel(2,2);        
         #------------------------------------
         # } No tocar desde aqui
         #----------------------------------
