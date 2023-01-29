@@ -305,7 +305,7 @@ while r.leerT() < Tfin and not r.leerFinFases()   and not r.leerColision():
         
         #------------------------------------
         # Tocar a partir de aqui {
-        
+        #------------------------------------
             
         lw,rw = move(1,1)
         print(f'Rueda Izq: {lw} Rueda Der: {rw}')
