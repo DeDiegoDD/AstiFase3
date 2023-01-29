@@ -293,8 +293,6 @@ while r.leerT() < Tfin and not r.leerFinFases()   and not r.leerColision():
         ruedaI = (2*v-L*w)/2
         ruedaD = (2*v+L*w)/2
         r.fijarVel(ruedaI, ruedaD)
-
-    centrado = False
     
     #------------------------------------
     # } No tocar desde aqui
@@ -308,12 +306,11 @@ while r.leerT() < Tfin and not r.leerFinFases()   and not r.leerColision():
         # Tocar a partir de aqui {
         #------------------------------------
         
-        while not centrado:
-            if r.leerDistSensor() > 0.1 :
-                move(1,-0.5)
-            if r.leerDistSensor() < -0.1 :
-                move(1,0.5)
         move(1,0)
+        if r.leerDistSensor() > 0.1 :
+            move(1,-0.5)
+        if r.leerDistSensor() < -0.1 :
+            move(1,0.5)
 
         #------------------------------------
         # } No tocar desde aqui
