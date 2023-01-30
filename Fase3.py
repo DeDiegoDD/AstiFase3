@@ -294,6 +294,9 @@ while r.leerT() < Tfin and not r.leerFinFases()   and not r.leerColision():
         ruedaD = (2*v+L*w)/2
         r.fijarVel(ruedaI, ruedaD)
     
+    izq=False
+    der=False
+
     #------------------------------------
     # } No tocar desde aqui
     #----------------------------------
@@ -308,9 +311,17 @@ while r.leerT() < Tfin and not r.leerFinFases()   and not r.leerColision():
         
         move(1,0)
         if r.leerDistSensor() > 0.1 :
-            move(1,-0.5)
+            move(1,-0.6)
+            if (not izq):
+                print("Estoy a la izquierda de la recta")
+                izq=True
+                der=False
         if r.leerDistSensor() < -0.1 :
-            move(1,0.5)
+            move(1,0.6)
+            if (not der):
+                print("Estoy a la derecha de la recta")
+                der=True
+                izq=False
 
         #------------------------------------
         # } No tocar desde aqui
