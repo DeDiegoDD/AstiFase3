@@ -286,7 +286,7 @@ while r.leerT() < Tfin and not r.leerFinFases()   and not r.leerColision():
     Tfin=200
     #------------------------------------
     # Tocar a partir de aqui {
-    #----------------------------------
+    #------------------------------------
 
     def move(v, w):
         L = 0.025
@@ -296,10 +296,11 @@ while r.leerT() < Tfin and not r.leerFinFases()   and not r.leerColision():
     
     izq=False
     der=False
-
+    par=False
+    ant=r.leerDistSensor()
     #------------------------------------
     # } No tocar desde aqui
-    #----------------------------------
+    #------------------------------------
     
     while r.leerT() < Tfin and not r.leerFinal()  and not r.leerColision():
           
@@ -308,24 +309,29 @@ while r.leerT() < Tfin and not r.leerFinFases()   and not r.leerColision():
         #------------------------------------
         # Tocar a partir de aqui {
         #------------------------------------
-        
-        move(1,0)
-        if r.leerDistSensor() > 0.1 :
-            move(1,-0.6)
-            if not izq:
-                print("Estoy a la izquierda de la recta")
-                izq=True
-                der=False
-        if r.leerDistSensor() < -0.1 :
-            move(1,0.6)
-            if not der:
-                print("Estoy a la derecha de la recta")
-                der=True
-                izq=False
+        if not par:    
+            move(2,0)
+            if r.leerDistSensor() > 0.1 :
+                move(1,-0.6)
+                if not izq:
+                    print("Estoy a la izquierda de la recta")
+                    izq=True
+                    der=False
+            if r.leerDistSensor() < -0.1 :
+                move(1,0.6)
+                if not der:
+                    print("Estoy a la derecha de la recta")
+                    der=True
+                    izq=False
+            if r.leerDistSensor - ant > 0 and not par:
+                par=True
+            ant=r.leerDistSensor()
+        else:
+            print(math.asin(r.leerDistSensor/r.leerDistDest))
 
         #------------------------------------
         # } No tocar desde aqui
-        #----------------------------------
+        #------------------------------------
       
 #-----------------
 if  r.leerFasesSuperadas()==9:
