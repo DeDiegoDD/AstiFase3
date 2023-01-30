@@ -311,7 +311,7 @@ while r.leerT() < Tfin and not r.leerFinFases()   and not r.leerColision():
         #------------------------------------
         if not par:    
             move(2,0)
-            distS=r.leerDistSensor()
+            distS=r.leerDistSensor()#hay que utilizar variables porque no se pueden hacer ni restas ni comparaciones con los métodos
             if distS > 0.1 :
                 move(1,-0.6)
                 if not izq:
@@ -332,7 +332,7 @@ while r.leerT() < Tfin and not r.leerFinFases()   and not r.leerColision():
             
             distS=r.leerDistSensor()
             distD=r.leerDistDest()
-            if((distS/distD)>=-1 and (distS/distD)<=1):
+            if((distS/distD)>=-1 and (distS/distD)<=1):#para que esté dentro del dominio del arcoseno
                 print(math.asin(distS/distD))
 
         #------------------------------------
