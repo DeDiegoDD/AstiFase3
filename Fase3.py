@@ -311,23 +311,29 @@ while r.leerT() < Tfin and not r.leerFinFases()   and not r.leerColision():
         #------------------------------------
         if not par:    
             move(2,0)
-            if r.leerDistSensor() > 0.1 :
+            distS=r.leerDistSensor()
+            if distS > 0.1 :
                 move(1,-0.6)
                 if not izq:
                     print("Estoy a la izquierda de la recta")
                     izq=True
                     der=False
-            if r.leerDistSensor() < -0.1 :
+            if distS < -0.1 :
                 move(1,0.6)
                 if not der:
                     print("Estoy a la derecha de la recta")
                     der=True
                     izq=False
-            if r.leerDistSensor - ant > 0 and not par:
+            act=r.leerDistSensor()
+            if act - ant > 0 and not par:
                 par=True
             ant=r.leerDistSensor()
         else:
-            print(math.asin(r.leerDistSensor/r.leerDistDest))
+            
+            distS=r.leerDistSensor()
+            distD=r.leerDistDest()
+            if((distS/distD)>=-1 and (distS/distD)<=1):
+                print(math.asin(distS/distD))
 
         #------------------------------------
         # } No tocar desde aqui
