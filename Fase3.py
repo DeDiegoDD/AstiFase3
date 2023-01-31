@@ -9,6 +9,7 @@ import numpy as np
 import pylab as pl
 import math
 
+
 class Robot:
     def __init__(self,Tfin):
         self.__x = 0
@@ -293,7 +294,11 @@ while r.leerT() < Tfin and not r.leerFinFases()   and not r.leerColision():
         ruedaI = (2*v-L*w)/2
         ruedaD = (2*v+L*w)/2
         r.fijarVel(ruedaI, ruedaD)
-    
+
+    # Funcin para que el robot gire un ángulo determinado en grados
+    def turn(a):
+        pass
+        
     izq=False
     der=False
     par=False
@@ -327,7 +332,7 @@ while r.leerT() < Tfin and not r.leerFinFases()   and not r.leerColision():
                 par=True
             ant=r.leerDistSensor()
         else:
-            print(math.asin(r.leerDistSensor/r.leerDistDest))
+            turn(math.asin(r.leerDistSensor/r.leerDistDest))
 
         #------------------------------------
         # } No tocar desde aqui
