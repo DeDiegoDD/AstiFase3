@@ -298,7 +298,7 @@ while r.leerT() < Tfin and not r.leerFinFases()   and not r.leerColision():
     prev_DO = ()
     
 
-    i = 0
+
     
 
     """ Movimiento del robot (l_vel, ang_vel) """
@@ -329,37 +329,18 @@ while r.leerT() < Tfin and not r.leerFinFases()   and not r.leerColision():
         DD = r.leerDistDest()
         DO = r.leerSensorObs()
 
-        """
-        # Hay obstáculo
-        if len(DO) != 0:
-            DO = DO[0]
-            # Obstáculo a la derecha
-            if DO[1] < 0.26 and DO[1] >= 0: 
-                move(1, 0.3)
-
-            # Obstáculo a la izquierda
-            elif DO[1] > -0.26 and DO[1] < 0:
-                move(1, -0.3)
-        
-        """
-
+        print(DD)
         if DD > prev_DD:
-            move(0, 2)
+            move(0, 1)
 
-        
+    
         # Robot a la izquierda de LG
-        elif DS > 0.1 :
-            if DS > 9:
-                move(1, 0.7)
-            else: 
-                move(1, -0.3)
+        if DS > 0.1 :
+            move(1, -0.3)
      
         # Robot a la derecha de LG   
         elif DS < -0.1 :
-            if DS < -9:
-                move(1, -0.7)
-            else: 
-                move(1, 0.3)
+            move(1, 0.3)
      
 
         # Robot encima de LG
