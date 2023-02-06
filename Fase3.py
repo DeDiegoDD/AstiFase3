@@ -1,14 +1,12 @@
 # -*- coding: utf-8 -*-
 """
 Created on Mon Nov 28 10:39:27 2022
-
 @author: Jesus Enrique Sierra Garcia
 """
 
 import numpy as np
 import pylab as pl
 import math
-
 
 class Robot:
     def __init__(self,Tfin):
@@ -289,20 +287,29 @@ while r.leerT() < Tfin and not r.leerFinFases()   and not r.leerColision():
     # Tocar a partir de aqui {
     #------------------------------------
 
+    # Variables de sensores
+    DS = r.leerDistSensor()
+    DD = r.leerDistDest()
+    DO = r.leerSensorObs()
+
+    # Inicialización de variables anteriores
+    prev_DS = 0
+    prev_DD = 1000
+    prev_DO = ()
+    
+
+    i = 0
+    
+
+    """ Movimiento del robot (l_vel, ang_vel) """
     def move(v, w):
-        L = 0.025
+
+        L = 0.1
         ruedaI = (2*v-L*w)/2
         ruedaD = (2*v+L*w)/2
         r.fijarVel(ruedaI, ruedaD)
+    
 
-    # Funcin para que el robot gire un ángulo determinado en grados
-    def turn(a):
-        pass
-        
-    izq=False
-    der=False
-    par=False
-    ant=r.leerDistSensor()
     #------------------------------------
     # } No tocar desde aqui
     #------------------------------------
@@ -313,27 +320,61 @@ while r.leerT() < Tfin and not r.leerFinFases()   and not r.leerColision():
         
         #------------------------------------
         # Tocar a partir de aqui {
-        #------------------------------------
-        if not par:    
-            move(2,0)
-            if r.leerDistSensor() > 0.1 :
-                move(1,-0.6)
-                if not izq:
-                    print("Estoy a la izquierda de la recta")
-                    izq=True
-                    der=False
-            if r.leerDistSensor() < -0.1 :
-                move(1,0.6)
-                if not der:
-                    print("Estoy a la derecha de la recta")
-                    der=True
-                    izq=False
-            if r.leerDistSensor - ant > 0 and not par:
-                par=True
-            ant=r.leerDistSensor()
-        else:
-            turn(math.asin(r.leerDistSensor/r.leerDistDest))
+        #------------------------------------    
 
+        
+
+        # Lectura de sensores: distSensor y distDenstino
+        DS = r.leerDistSensor()
+        DD = r.leerDistDest()
+        DO = r.leerSensorObs()
+
+        """
+        # Hay obstáculo
+        if len(DO) != 0:
+            DO = DO[0]
+            # Obstáculo a la derecha
+            if DO[1] < 0.26 and DO[1] >= 0: 
+                move(1, 0.3)
+
+            # Obstáculo a la izquierda
+            elif DO[1] > -0.26 and DO[1] < 0:
+                move(1, -0.3)
+        
+        """
+
+        if DD > prev_DD:
+            move(0, 2)
+
+        
+        # Robot a la izquierda de LG
+        elif DS > 0.1 :
+            if DS > 9:
+                move(1, 0.7)
+            else: 
+                move(1, -0.3)
+     
+        # Robot a la derecha de LG   
+        elif DS < -0.1 :
+            if DS < -9:
+                move(1, -0.7)
+            else: 
+                move(1, 0.3)
+     
+
+        # Robot encima de LG
+        else: 
+            move(2, 0)
+
+        prevDS = DS
+        prevDD = DD
+        prev_DO = DO
+
+
+
+
+
+    
         #------------------------------------
         # } No tocar desde aqui
         #------------------------------------
@@ -358,4 +399,3 @@ else:
     
 #DIBUJO
 r.pintar()
-
