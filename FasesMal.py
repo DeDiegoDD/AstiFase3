@@ -296,9 +296,10 @@ while r.leerT() < Tfin and not r.leerFinFases()   and not r.leerColision():
     prev_DS = 0
     prev_DD = 1000
     prev_DO = ()
-
-    ini = False
     i = 0
+    j = 0
+   
+    
 
     """ Movimiento del robot (l_vel, ang_vel) """
     def move(v, w):
@@ -329,38 +330,41 @@ while r.leerT() < Tfin and not r.leerFinFases()   and not r.leerColision():
         DO = r.leerSensorObs()
 
         
-        move(2, 0)
-        if r.leerFasesSuperadas() < 4:
-            if ini:     
-                if len(DO) != 0 and (DO[0][1] < 0.35 and DO[0][1] > -0.35):
-                    move(0.3,-1.7)
-                else:    
-                    if DS > 0:
-                        move(1, -0.3)
-                    elif DS < 0:
-                        move(1, 0.3)
-        
-        elif r.leerFasesSuperadas() < 5: 
+        move(1000, 0)
 
-            if DS > 0:
-                move(1.3, -0.3 + i)
-            elif DS < 0:
-                move(1.3, 0.3 - i)
-            i += 0.0009
+        if r.leerFasesSuperadas() == 0:
+            r.fijarVel(2, 2)
+        
+        elif r.leerFasesSuperadas() == 1:
 
-        elif r.leerFasesSuperadas() < 6:
-            if len(DO) != 0 and (DO[0][1] < 0.6 and DO[0][1] > -0.6):
-                move(0.4,-1.26)
-            else:
-                move(1, 0.21)
+            r.fijarVel(2,1.88 + i)
+            i += 0.00522
+
+        elif r.leerFasesSuperadas() == 2:
+            r.fijarVel(2,1.88 + i)
+            i += 0.008
         
-        elif r.leerFasesSuperadas() < 7:
-            if len(DO) != 0 and (DO[0][1] < 0.6 and DO[0][1] > -0.6):
-                move(0.4,+1.7)
-            else:
-                move(1, 0.19)
+        elif r.leerFasesSuperadas() == 3:
+            r.fijarVel(2,1.88 + i)
+            i += 0.012
         
-        elif r.leerFasesSuperadas() < 8: 
+        elif r.leerFasesSuperadas() == 4: 
+            r.fijarVel(1.77 + i, 2)
+            i += 0.0102
+        
+        elif r.leerFasesSuperadas() == 5:
+            r.fijarVel(1.77 + i, 2)
+            i += 0.01025
+
+        elif r.leerFasesSuperadas() == 6:
+            
+            if i < 90:
+                r.fijarVel(2, -0.74 + i)
+                i += 3.5 
+            else:
+                r.fijarVel(2, 1.988  +j)
+                j += 0.0000000005
+        elif r.leerFasesSuperadas() == 7: 
             move(1, 0.08)
             
         
@@ -371,11 +375,7 @@ while r.leerT() < Tfin and not r.leerFinFases()   and not r.leerColision():
         prevDD = DD
         prev_DO = DO
 
-
-
-        ini = True
-
-    
+        
         #------------------------------------
         # } No tocar desde aqui
         #------------------------------------
