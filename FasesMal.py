@@ -287,28 +287,17 @@ while r.leerT() < Tfin and not r.leerFinFases()   and not r.leerColision():
     # Tocar a partir de aqui {
     #------------------------------------
 
-    # Variables de sensores
-    DS = r.leerDistSensor()
-    DD = r.leerDistDest()
-    DO = r.leerSensorObs()
+    # Variable de fase
+    try:
+        ciclos
+    except NameError:
+        ciclos = 0
+    else:
+        ciclos += 1
 
-    # Inicialización de variables anteriores
-    prev_DS = 0
-    prev_DD = 1000
-    prev_DO = ()
+    # Variables de ayuda
     i = 0
     j = 0
-   
-    
-
-    """ Movimiento del robot (l_vel, ang_vel) """
-    def move(v, w):
-
-        L = 0.1
-        ruedaI = (2*v-L*w)/2
-        ruedaD = (2*v+L*w)/2
-        r.fijarVel(ruedaI, ruedaD)
-        
 
     #------------------------------------
     # } No tocar desde aqui
@@ -321,59 +310,47 @@ while r.leerT() < Tfin and not r.leerFinFases()   and not r.leerColision():
         #------------------------------------
         # Tocar a partir de aqui {
         #------------------------------------    
-
-        
-
-        # Lectura de sensores: distSensor y distDenstino
-        DS = r.leerDistSensor()
-        DD = r.leerDistDest()
-        DO = r.leerSensorObs()
-
-        
-        move(1000, 0)
-
-        if r.leerFasesSuperadas() == 0:
+       
+        if  ciclos == 0:
             r.fijarVel(2, 2)
-        
-        elif r.leerFasesSuperadas() == 1:
-
-            r.fijarVel(2,1.88 + i)
+            
+        elif ciclos == 1:
+       
+            r.fijarVel(2,1.87 + i)
             i += 0.00522
 
-        elif r.leerFasesSuperadas() == 2:
+        elif ciclos == 2:
+    
             r.fijarVel(2,1.88 + i)
             i += 0.008
         
-        elif r.leerFasesSuperadas() == 3:
+        elif ciclos == 3:
             r.fijarVel(2,1.88 + i)
             i += 0.012
         
-        elif r.leerFasesSuperadas() == 4: 
+        elif ciclos == 4:
             r.fijarVel(1.77 + i, 2)
             i += 0.0102
         
-        elif r.leerFasesSuperadas() == 5:
+        elif ciclos == 5:
             r.fijarVel(1.77 + i, 2)
             i += 0.01025
 
-        elif r.leerFasesSuperadas() == 6:
-            
-            if i < 90:
-                r.fijarVel(2, -0.74 + i)
-                i += 3.5 
+        elif ciclos == 6:
+            if i < 91:
+                r.fijarVel(2, -2.34 + i)
+                i += 2.4
             else:
-                r.fijarVel(2, 1.988  +j)
-                j += 0.0000000005
-        elif r.leerFasesSuperadas() == 7: 
-            move(1, 0.08)
-            
+                r.fijarVel(2, 1.97  +j)
+                j += 0.0008
         
+        elif ciclos == 7: 
+            r.fijarVel(2, -2 + i)
+            i += 1.6
+            
         else:
-            move(1, -0.1 - i)
-            i += 0.00012
-        prevDS = DS
-        prevDD = DD
-        prev_DO = DO
+            r.fijarVel(2, -0.1 + i)
+            i += 0.8
 
         
         #------------------------------------
