@@ -343,7 +343,7 @@ while r.leerT() < Tfin and not r.leerFinFases()   and not r.leerColision():
         """ Algoritmo de búsqueda """
 
         # Si hay un obstáculo
-        if len(DO) != 0 and ((DO[0][1] > -0.28 and DO[0][1] < 0.28)):
+        if len(DO) != 0 and ((DO[0][1] > -0.27 and DO[0][1] < 0.27)):
             # Si está a la derecha
             if DO[0][1] < 0:
                 move(0, 2.1)
@@ -355,18 +355,20 @@ while r.leerT() < Tfin and not r.leerFinFases()   and not r.leerColision():
 
         else:
             # Si se está acercando a buen nivel continua hacia delante
-            if (prev_DD - DD) >= 0.16:
-                move(1.8, 0)
+            if (prev_DD - DD) >= 0.17:
+                move(1.9, 0)
             
-            # Si no en función de que lado está de la LG gira hacia un lado o hacia otro
+        
             else:
-                move(1.8, 2)
+                move(1.8, 1.8)
 
             
         # Asignación de sensores previos
         prev_DS = DS
         prev_DD = DD
         prev_DO = DO
+
+        
         
 
 
