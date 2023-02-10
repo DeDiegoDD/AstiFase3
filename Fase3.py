@@ -331,16 +331,21 @@ while r.leerT() < Tfin and not r.leerFinFases()   and not r.leerColision():
         DS = r.leerDistSensor()
         DD = r.leerDistDest()
         DO = r.leerSensorObs()
-        if len(DO) != 0 and ((DO[0][1] > -0.3 and DO[0][1] < 0.3)):
-            if DO[0][1] < 0:
-                move(0, 1.8)
-                
-                
-            else:
-                move(0, -1.8)
-            
-                
 
+        if len(DO) > 1:
+            for j in range(4):
+                for i in range(len(DO) - 1):
+                    if DO[i][1] > DO[i+1][1]:
+                        DO[i][1], DO[i+1][1] = DO[i+1][1], DO[i][1]
+
+        if len(DO) != 0 and ((DO[0][1] > -0.28 and DO[0][1] < 0.28)):
+        
+            if DO[0][1] < 0:
+                move(0, 2.1)
+                    
+                    
+            else:
+                move(0, -2.1)
 
         else:
             if (prev_DD - DD) >= 0.093:
@@ -359,7 +364,7 @@ while r.leerT() < Tfin and not r.leerFinFases()   and not r.leerColision():
         prev_DS = DS
         prev_DD = r.leerDistDest()
         prev_DO = DO
-
+        print(DO)
 
 
 
