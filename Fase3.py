@@ -303,10 +303,13 @@ while r.leerT() < Tfin and not r.leerFinFases()   and not r.leerColision():
 
     """ Movimiento del robot (l_vel, ang_vel) """
     def move(v, w):
-
-        L = 0.1
+        L = 0.2
         ruedaI = (2*v-L*w)/2
         ruedaD = (2*v+L*w)/2
+        if ruedaD> 2 or ruedaD < -2:
+            print("Rueda D al máximo")
+        elif ruedaI > 2 or ruedaI < -2:
+            print("Rueda I al máximo")
         r.fijarVel(ruedaI, ruedaD)
     
 
@@ -328,29 +331,21 @@ while r.leerT() < Tfin and not r.leerFinFases()   and not r.leerColision():
         DS = r.leerDistSensor()
         DD = r.leerDistDest()
         DO = r.leerSensorObs()
+        if len(DO) != 0 and ((DO[0][1] > -0.3 and DO[0][1] < 0.3)):
+            if DO[0][1] < 0:
+                move(0, 1.8)
+            else:
+                move(0, -1.8)
 
-        print(DD)
-        if DD > prev_DD:
-            move(0, 1)
-
-    
-        # Robot a la izquierda de LG
-        if DS > 0.1 :
-            move(1, -0.3)
-     
-        # Robot a la derecha de LG   
-        elif DS < -0.1 :
-            move(1, 0.3)
-     
-
-        # Robot encima de LG
-        else: 
-            move(2, 0)
-
-        prevDS = DS
-        prevDD = DD
+        else:
+            if (prev_DD - DD) >= 0.093:
+                move(1.1, 0)
+            else:
+                move(1.3, 1)
+            
+        prev_DS = DS
+        prev_DD = r.leerDistDest()
         prev_DO = DO
-
 
 
 

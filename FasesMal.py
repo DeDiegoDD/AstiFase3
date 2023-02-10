@@ -7,8 +7,6 @@ Created on Mon Nov 28 10:39:27 2022
 import numpy as np
 import pylab as pl
 import math
-import pandas as pd
-
 
 class Robot:
     def __init__(self,Tfin):
@@ -282,8 +280,6 @@ class Robot:
 Tfin=200  
 r=Robot(Tfin)
 
-l_DS = []
-l_DO = []
 while r.leerT() < Tfin and not r.leerFinFases()   and not r.leerColision():
     r.actTiempo()
     Tfin=200
@@ -303,8 +299,7 @@ while r.leerT() < Tfin and not r.leerFinFases()   and not r.leerColision():
     i = 0
     j = 0
 
-    DS = []
-    DO = []
+  
     #------------------------------------
     # } No tocar desde aqui
     #------------------------------------
@@ -319,39 +314,31 @@ while r.leerT() < Tfin and not r.leerFinFases()   and not r.leerColision():
        
         if  ciclos == 0:
             r.fijarVel(2, 2)
-            DS.append(r.leerDistSensor())
-            DO.append(r.leerDistDest())
-            
+
         elif ciclos == 1:
        
             r.fijarVel(2,1.87 + i)
             i += 0.00522
-            DS.append(r.leerDistSensor())
-            DO.append(r.leerDistDest())
+          
 
         elif ciclos == 2:
     
             r.fijarVel(2,1.88 + i)
             i += 0.008
-            DS.append(r.leerDistSensor())
-            DO.append(r.leerDistDest())
+    
         elif ciclos == 3:
             r.fijarVel(2,1.88 + i)
             i += 0.012
-            DS.append(r.leerDistSensor())
-            DO.append(r.leerDistDest())
-            
+
         elif ciclos == 4:
             r.fijarVel(1.77 + i, 2)
             i += 0.0102
-            DS.append(r.leerDistSensor())
-            DO.append(r.leerDistDest())
+
         
         elif ciclos == 5:
             r.fijarVel(1.77 + i, 2)
             i += 0.01025
-            DS.append(r.leerDistSensor())
-            DO.append(r.leerDistDest())
+
 
         elif ciclos == 6:
             if i < 91:
@@ -360,28 +347,24 @@ while r.leerT() < Tfin and not r.leerFinFases()   and not r.leerColision():
             else:
                 r.fijarVel(2, 1.97  +j)
                 j += 0.0008
-            DS.append(r.leerDistSensor())
-            DO.append(r.leerDistDest())
+    
 
         
         elif ciclos == 7: 
             r.fijarVel(2, -2 + i)
             i += 1.6
-            DS.append(r.leerDistSensor())
-            DO.append(r.leerDistDest())
+  
             
         else:
             r.fijarVel(2, -0.1 + i)
             i += 0.8
-            DS.append(r.leerDistSensor())
-            DO.append(r.leerDistDest())
+         
 
         
         #------------------------------------
         # } No tocar desde aqui
         #------------------------------------
-    l_DS.append(DS)
-    l_DO.append(DO)
+
 #-----------------
 if  r.leerFasesSuperadas()==9:
     print ("--------------------")
@@ -401,8 +384,5 @@ else:
     print (r.leerTiempoTotal() )
     
 #DIBUJO
-#r.pintar()
+r.pintar()
 
-for i in range(0, 9):
-    pl.plot(l_DO[i])
-    pl.show()
