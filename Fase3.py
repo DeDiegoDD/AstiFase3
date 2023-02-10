@@ -355,26 +355,17 @@ while r.leerT() < Tfin and not r.leerFinFases()   and not r.leerColision():
 
         else:
             # Si se está acercando a buen nivel continua hacia delante
-            if (prev_DD - DD) >= 0.093:
-                move(1.1, 0)
+            if (prev_DD - DD) >= 0.16:
+                move(1.8, 0)
             
             # Si no en función de que lado está de la LG gira hacia un lado o hacia otro
             else:
-                if(DS > 0):
-                    move(1.3, -1)
+                move(1.8, 2)
 
-                    if(DD > prev_DD):
-                        move(0, -1)
-
-                else:
-                    move(1.3, 1)
-
-                    if(DD > prev_DD):
-                        move(0, 1)
             
         # Asignación de sensores previos
         prev_DS = DS
-        prev_DD = r.leerDistDest()
+        prev_DD = DD
         prev_DO = DO
         
 
