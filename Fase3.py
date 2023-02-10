@@ -334,14 +334,27 @@ while r.leerT() < Tfin and not r.leerFinFases()   and not r.leerColision():
         if len(DO) != 0 and ((DO[0][1] > -0.3 and DO[0][1] < 0.3)):
             if DO[0][1] < 0:
                 move(0, 1.8)
+                
+                
             else:
                 move(0, -1.8)
+            
+                
+
 
         else:
             if (prev_DD - DD) >= 0.093:
                 move(1.1, 0)
             else:
-                move(1.3, 1)
+                if(DS>0):
+                    move(1.3, -1)
+                    if(DD>prev_DD):
+                        move(0,-1)
+
+                else:
+                    move(1.3,1)
+                    if(DD>prev_DD):
+                        move(0,1)
             
         prev_DS = DS
         prev_DD = r.leerDistDest()
