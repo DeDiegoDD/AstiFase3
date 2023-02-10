@@ -332,39 +332,51 @@ while r.leerT() < Tfin and not r.leerFinFases()   and not r.leerColision():
         DD = r.leerDistDest()
         DO = r.leerSensorObs()
 
+        # Si hay más de un obstáculo solo quiero el de menor ángulo
         if len(DO) > 1:
             for j in range(4):
                 for i in range(len(DO) - 1):
-                    if DO[i][1] > DO[i+1][1]:
+                    if abs(DO[i][1]) > abs(DO[i+1][1]):
                         DO[i][1], DO[i+1][1] = DO[i+1][1], DO[i][1]
 
+
+        """ Algoritmo de búsqueda """
+
+        # Si hay un obstáculo
         if len(DO) != 0 and ((DO[0][1] > -0.28 and DO[0][1] < 0.28)):
-        
+            # Si está a la derecha
             if DO[0][1] < 0:
                 move(0, 2.1)
                     
                     
+            # Si está a la izquierda
             else:
                 move(0, -2.1)
 
         else:
+            # Si se está acercando a buen nivel continua hacia delante
             if (prev_DD - DD) >= 0.093:
                 move(1.1, 0)
+            
+            # Si no en función de que lado está de la LG gira hacia un lado o hacia otro
             else:
-                if(DS>0):
+                if(DS > 0):
                     move(1.3, -1)
-                    if(DD>prev_DD):
-                        move(0,-1)
+
+                    if(DD > prev_DD):
+                        move(0, -1)
 
                 else:
-                    move(1.3,1)
-                    if(DD>prev_DD):
-                        move(0,1)
+                    move(1.3, 1)
+
+                    if(DD > prev_DD):
+                        move(0, 1)
             
+        # Asignación de sensores previos
         prev_DS = DS
         prev_DD = r.leerDistDest()
         prev_DO = DO
-        print(DO)
+        
 
 
 
