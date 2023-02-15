@@ -306,10 +306,6 @@ while r.leerT() < Tfin and not r.leerFinFases()   and not r.leerColision():
         L = 0.2
         ruedaI = (2*v-L*w)/2
         ruedaD = (2*v+L*w)/2
-        #if ruedaD> 2 or ruedaD < -2:
-        #    print("Rueda D al máximo")
-        #elif ruedaI > 2 or ruedaI < -2:
-        #    print("Rueda I al máximo")
         r.fijarVel(ruedaI, ruedaD)
     
 
