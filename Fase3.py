@@ -355,10 +355,9 @@ while r.leerT() < Tfin and not r.leerFinFases()   and not r.leerColision():
 
         else:
             # Si se está acercando a buen nivel continua hacia delante
-            if (prev_DD - DD) >= 0.17:
+            if (prev_DD - DD) >= 0.1758:
                 move(2, 0)
             
-        
             else:
                 if (DS > 0):
                     move(2, -1.8)
