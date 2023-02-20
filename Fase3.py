@@ -339,15 +339,15 @@ while r.leerT() < Tfin and not r.leerFinFases()   and not r.leerColision():
         """ Algoritmo de búsqueda """
 
         # Si hay un obstáculo
-        if len(DO) != 0 and ((DO[0][1] > -0.27 and DO[0][1] < 0.27)):
+        if len(DO) != 0 and ((DO[0][1] > -0.29 and DO[0][1] < 0.29)):
             # Si está a la derecha
             if DO[0][1] < 0:
-                move(0, 2.1)
+                move(0, 2)
                     
                     
             # Si está a la izquierda
             else:
-                move(0, -2.1)
+                move(0, -2)
 
         else:
             # Si se está acercando a buen nivel continua hacia delante
@@ -356,9 +356,9 @@ while r.leerT() < Tfin and not r.leerFinFases()   and not r.leerColision():
             
             else:
                 if (DS > 0):
-                    move(2, -1.8)
+                    move(2, -1.9)
                 else:
-                    move(2, 1.8)
+                    move(2, 1.9)
 
             
         # Asignación de sensores previos
